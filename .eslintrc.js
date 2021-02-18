@@ -38,6 +38,7 @@ module.exports = {
                 extensions: ['.tsx'],
             },
         ],
+        'react/jsx-indent': [2, 4],
         // I believe shadowing is a nice language feature.
         'no-shadow': 'off',
         'import/order': 'off',
@@ -101,5 +102,6 @@ module.exports = {
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error'],
         'require-await': ['error'],
+        '@typescript-eslint/triple-slash-reference': 'off',
     },
 };

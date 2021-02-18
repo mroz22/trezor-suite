@@ -8,12 +8,12 @@ describe('resolve static path', () => {
         process.env = OLD_ENV;
     });
     it('should return static path', () => {
-        process.env.assetPrefix = '';
+        process.env.ASSET_PREFIX = '';
         expect(resolveStaticPath('mypath')).toBe('/static/mypath');
     });
 
-    it('should return static path prefixed with assetPrefix', () => {
-        process.env.assetPrefix = 'brachName';
+    it('should return static path prefixed with ASSET_PREFIX', () => {
+        process.env.ASSET_PREFIX = 'brachName';
         expect(resolveStaticPath('mypath')).toBe('brachName/static/mypath');
     });
 });
