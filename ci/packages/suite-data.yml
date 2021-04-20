@@ -1,0 +1,31 @@
+msg-system config validation:
+  stage: validation
+  script:
+    - yarn workspace @trezor/suite-data msg-system-validate-config
+
+msg-system config sign dev:
+  stage: prebuild
+  script:
+    - yarn workspace @trezor/suite-data msg-system-sign-config
+    # TODO (stick): upload packages/suite-data/files/message-system/config.v1.jws to s3 data.trezor.io/config/develop/...
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - packages/suite-data/files/message-system/config.v1.jws
+
+msg-system config sign:
+  stage: prebuild
+  only:
+    refs:
+      - codesign
+  variables:
+    # TODO (stick): change to key vault variable; use only body of private key (without -----BEGIN EC.. and -----END EC...)
+    jws_private_key: MHQCAQEEINi7lfZE3Y5U9srS58A+AN7Ul7HeBXsHEfzVzijColOkoAcGBSuBBAAK oUQDQgAEbSUHJlr17+NywPS/w+xMkp3dSD8eWXSuAfFKwonZPe5fL63kISipJC+e JP7Mad0WxgyJoiMsZCV6BZPK2jIFdg==
+  script:
+    - export JWS_PRIVATE_KEY="$jws_private_key"
+    - yarn workspace @trezor/suite-data msg-system-sign-config
+    # TODO (stick): upload packages/suite-data/files/message-system/config.v1.jws to s3 data.trezor.io/config/stable/...
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - packages/suite-data/files/message-system/config.v1.jws
