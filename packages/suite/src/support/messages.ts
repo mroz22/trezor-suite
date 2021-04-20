@@ -743,6 +743,10 @@ const definedMessages = defineMessages({
         defaultMessage: 'Trans. ID:',
         id: 'TR_SELL_TRANS_ID',
     },
+    TR_SELL_CONNECT_DEVICE_TO_CONTINUE: {
+        defaultMessage: 'Connect your device to continue.',
+        id: 'TR_EXCHANGE_CONNECT_DEVICE_TO_CONTINUE',
+    },
     TR_BUY_STATUS_PENDING: {
         defaultMessage: 'Pending',
         id: 'TR_BUY_STATUS_PENDING',
