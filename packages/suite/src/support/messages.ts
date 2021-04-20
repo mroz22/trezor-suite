@@ -271,6 +271,10 @@ const definedMessages = defineMessages({
         defaultMessage: 'Show offers',
         id: 'TR_EXCHANGE_SHOW_OFFERS',
     },
+    TR_EXCHANGE_CONNECT_DEVICE_TO_CONTINUE: {
+        defaultMessage: 'Connect your device to continue.',
+        id: 'TR_EXCHANGE_CONNECT_DEVICE_TO_CONTINUE',
+    },
     TR_EXCHANGE_OFFERS_REFRESH: {
         defaultMessage: 'Refresh in',
         id: 'TR_EXCHANGE_OFFERS_REFRESH',
