@@ -18,11 +18,7 @@ msg-system config sign:
   only:
     refs:
       - codesign
-  variables:
-    # TODO (stick): change to key vault variable; use only body of private key (without -----BEGIN EC.. and -----END EC...)
-    jws_private_key: MHQCAQEEINi7lfZE3Y5U9srS58A+AN7Ul7HeBXsHEfzVzijColOkoAcGBSuBBAAK oUQDQgAEbSUHJlr17+NywPS/w+xMkp3dSD8eWXSuAfFKwonZPe5fL63kISipJC+e JP7Mad0WxgyJoiMsZCV6BZPK2jIFdg==
   script:
-    - export JWS_PRIVATE_KEY="$jws_private_key"
     - yarn workspace @trezor/suite-data msg-system-sign-config
     - aws s3 cp packages/suite-data/files/message-system/config.v1.jws s3://data.trezor.io/config/stable/config.v1.jws
   artifacts:

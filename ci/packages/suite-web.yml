@@ -1,7 +1,4 @@
-# TODO (stick): change to key vault variable; use only body of public key (without -----BEGIN EC.. and -----END EC...)
 .config_sign_stable: &config_sign_stable
-  variables:
-    jws_public_key: MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEbSUHJlr17+NywPS/w+xMkp3dSD8eWXSuAfFKwonZPe5fL63kISipJC+eJP7Mad0WxgyJoiMsZCV6BZPK2jIFdg==
   needs:
     - msg-system config sign
 
@@ -65,7 +62,6 @@ suite-web build stable codesign:
     refs:
       - codesign
   script:
-    - export JWS_PUBLIC_KEY="$jws_public_key"
     - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
     - yarn build:libs
     - assetPrefix=/web yarn workspace @trezor/suite-web build
