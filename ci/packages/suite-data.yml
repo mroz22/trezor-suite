@@ -7,7 +7,7 @@ msg-system config sign dev:
   stage: prebuild
   script:
     - yarn workspace @trezor/suite-data msg-system-sign-config
-    # TODO (stick): upload packages/suite-data/files/message-system/config.v1.jws to s3 data.trezor.io/config/develop/...
+    - aws s3 cp packages/suite-data/files/message-system/config.v1.jws s3://data.trezor.io/config/develop/config.v1.jws
   artifacts:
     expire_in: 7 days
     paths:
@@ -24,7 +24,7 @@ msg-system config sign:
   script:
     - export JWS_PRIVATE_KEY="$jws_private_key"
     - yarn workspace @trezor/suite-data msg-system-sign-config
-    # TODO (stick): upload packages/suite-data/files/message-system/config.v1.jws to s3 data.trezor.io/config/stable/...
+    - aws s3 cp packages/suite-data/files/message-system/config.v1.jws s3://data.trezor.io/config/stable/config.v1.jws
   artifacts:
     expire_in: 7 days
     paths:
