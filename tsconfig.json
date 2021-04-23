@@ -33,6 +33,7 @@
             "@suite-services/*": ["./packages/suite/src/services/suite/*"],
             "@suite-services": ["./packages/suite/src/services/suite/index"],
             "@suite-workers/*": ["./packages/suite/src/workers/*"],
+            "@suite-workers": ["./packages/suite/src/workers/index"],
             
             "@dashboard-components/*": ["./packages/suite/src/components/dashboard/*"],
             "@dashboard-components": ["./packages/suite/src/components/dashboard/index"],

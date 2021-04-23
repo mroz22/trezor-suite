@@ -106,7 +106,7 @@ const config: webpack.Configuration = {
             },
             // Workers
             {
-                test: /\.worker.ts$/,
+                test: /\/workers\/(.*).ts$/,
                 use: [
                     {
                         loader: 'worker-loader',
