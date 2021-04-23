@@ -7,10 +7,14 @@ export const FETCH_CONFIG_ERROR = '@message-system/fetch-config-error';
 export const SAVE_VALID_MESSAGES = '@message-system/save-valid-messages';
 export const DISMISS_MESSAGE = '@message-system/dismiss-message';
 
-// every 6 hours the message system config should be fetched
-export const FETCH_INTERVAL = 21600000; // in milliseconds
-// every 10 minutes the message system fetching interval should be checked
-export const FETCH_CHECK_INTERVAL = 600000; // in milliseconds
+/*
+ * On launch of application and then every 6 hours, a new config tries to fetch.
+ * However, there could be inconsistent behavior of window.setInterval implementation in various
+ * runtime environments during the time a user puts his computer asleep or a browser pauses its tab.
+ * Therefore, every 1 hour the message system fetching interval is checked.
+ */
+export const FETCH_INTERVAL = 21600000; // 6 hours in milliseconds
+export const FETCH_CHECK_INTERVAL = 3600000; // 1 hour in milliseconds
 
 /*
  * Bump version in case the new version of message system is not backward compatible.
