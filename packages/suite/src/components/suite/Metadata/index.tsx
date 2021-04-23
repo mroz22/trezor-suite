@@ -1,5 +1,5 @@
 import React from 'react';
-import { resolveStaticPath } from '@suite-utils/nextjs';
+import { resolveStaticPath } from '@suite-utils/build';
 import { URLS } from '@suite-constants';
 import Helmet from 'react-helmet';
 import { useIntl } from 'react-intl';

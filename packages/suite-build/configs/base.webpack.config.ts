@@ -25,7 +25,7 @@ const config: webpack.Configuration = {
     devtool: isDev ? 'eval-source-map' : false,
     devServer: {
         port: 3000,
-        hot: isDev, // HMR
+        hot: true, // Hot Module Reloading
     },
     output: {
         publicPath: `${assetPrefix}/`,

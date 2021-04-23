@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { calcTicks, calcTicksFromData } from '@suite-utils/date';
 import { variables, Button } from '@trezor/components';
 import { CARD_PADDING_SIZE } from '@suite-constants/layout';
-import GraphWorker from '../../../../../../workers/graph.worker';
+import GraphWorker from '@suite-workers/graph';
 import { getMinMaxValueFromData } from '@suite/utils/wallet/graphUtils';
 import * as graphActions from '@wallet-actions/graphActions';
 import { useActions, useSelector } from '@suite-hooks';

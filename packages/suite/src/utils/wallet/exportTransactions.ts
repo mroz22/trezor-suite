@@ -125,7 +125,7 @@ const preparePdf = (
     content: any[],
     coin: Network['symbol'],
     accountName: string,
-): any => {
+): TDocumentDefinitions => {
     const fieldKeys = Object.keys(fields);
     const fieldValues = Object.values(fields);
     const lines: any[] = [];

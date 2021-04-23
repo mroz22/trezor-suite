@@ -81,7 +81,7 @@ suite-web deploy dev:
   variables:
     COMPOSE_PROJECT_NAME: $CI_JOB_ID
     COMPOSE_FILE: ./docker/docker-compose.suite-ci.yml
-    # corresponds with the NextJs ASSET_PREFIX. Tells Cypress where is the index of application
+    # corresponds with the environment variable ASSET_PREFIX defined in webpack config. Tells Cypress where is the index of application
     CYPRESS_ASSET_PREFIX: /web
     CYPRESS_baseUrl: ${DEV_SERVER_URL}/suite-web/${CI_BUILD_REF_NAME}
     # should tests do snapshot testing

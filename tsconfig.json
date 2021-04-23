@@ -32,6 +32,7 @@
             "@suite-hooks": ["./packages/suite/src/hooks/suite/index"],
             "@suite-services/*": ["./packages/suite/src/services/suite/*"],
             "@suite-services": ["./packages/suite/src/services/suite/index"],
+            "@suite-workers/*": ["./packages/suite/src/workers/*"],
             
             "@dashboard-components/*": ["./packages/suite/src/components/dashboard/*"],
             "@dashboard-components": ["./packages/suite/src/components/dashboard/index"],
@@ -285,8 +286,6 @@
 
             "@landing-components/*": ["./packages/landing-page/components/*"],
             "@suite-web-landing-components/*": ["./packages/suite-web-landing/components/*"],
-
-            "*/workers/graph.worker": ["./packages/suite/src/workers/graph.worker"],
 
             "@native/*": ["./packages/suite-native/src/*"],
             "@desktop/*": ["./packages/suite-desktop/src/*"],
