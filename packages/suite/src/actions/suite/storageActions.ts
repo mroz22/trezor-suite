@@ -1,16 +1,17 @@
 import { db } from '@suite/storage';
-import { Dispatch, GetState, AppState, TrezorDevice } from '@suite-types';
-import { Account } from '@wallet-types';
-import { GraphData } from '@wallet-types/graph';
 import { getAccountKey } from '@wallet-utils/accountUtils';
-import { Discovery } from '@wallet-reducers/discoveryReducer';
 import * as notificationActions from '@suite-actions/notificationActions';
 import * as suiteActions from '@suite-actions/suiteActions';
 import { serializeDiscovery, serializeDevice } from '@suite-utils/storage';
 import { deviceGraphDataFilterFn } from '@wallet-utils/graphUtils';
-import { FormState } from '@wallet-types/sendForm';
-import { Trade, TradeType } from '@wallet-types/coinmarketCommonTypes';
 import { STORAGE } from './constants';
+
+import type { Dispatch, GetState, AppState, TrezorDevice } from '@suite-types';
+import type { Account } from '@wallet-types';
+import type { GraphData } from '@wallet-types/graph';
+import type { Discovery } from '@wallet-reducers/discoveryReducer';
+import type { FormState } from '@wallet-types/sendForm';
+import type { Trade, TradeType } from '@wallet-types/coinmarketCommonTypes';
 
 export type StorageAction =
     | { type: typeof STORAGE.LOAD }

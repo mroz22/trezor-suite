@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import { Message } from '@suite-types/messageSystem';
 import * as routerActions from '@suite-actions/routerActions';
 import * as messageSystemActions from '@suite-actions/messageSystemActions';
 import { useActions } from '@suite-hooks';
 import Wrapper from './components/Wrapper';
+
+import type { Message } from '@suite-types/messageSystem';
 
 type Props = {
     message: Message;

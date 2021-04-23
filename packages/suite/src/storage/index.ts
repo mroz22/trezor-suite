@@ -1,6 +1,7 @@
 import SuiteDB, { OnUpgradeFunc } from '@trezor/suite-storage';
-import { SuiteDBSchema } from './definitions';
 import { migrate } from './migrations';
+
+import type { SuiteDBSchema } from './definitions';
 
 const VERSION = 23; // don't forget to add migration and CHANGELOG when changing versions!
 

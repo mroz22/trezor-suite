@@ -1,9 +1,9 @@
 import produce from 'immer';
-import { WritableDraft } from 'immer/dist/internal';
 
-import { MessageSystem } from '@suite-types/messageSystem';
 import { Action } from '@suite-types';
 import { MESSAGE_SYSTEM, STORAGE } from '@suite/actions/suite/constants';
+
+import type { MessageSystem } from '@suite-types/messageSystem';
 
 export type MessageState = {
     banner: boolean;
@@ -39,7 +39,7 @@ const initialState: State = {
     dismissedMessages: {},
 };
 
-const getMessageStateById = (draft: WritableDraft<State>, id: string): MessageState => {
+const getMessageStateById = (draft: State, id: string): MessageState => {
     if (!draft.dismissedMessages[id]) {
         draft.dismissedMessages[id] = { banner: false, context: false, modal: false };
     }

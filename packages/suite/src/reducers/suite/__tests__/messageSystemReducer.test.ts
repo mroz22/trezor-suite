@@ -1,6 +1,7 @@
-import { Action } from '@suite-types';
 import messageSystemReducer, { State } from '../messageSystemReducer';
 import fixtures, { timestamp } from '../__fixtures__/messageSystemReducer';
+
+import type { Action } from '@suite-types';
 
 describe('Message system reducer', () => {
     fixtures.forEach(f => {

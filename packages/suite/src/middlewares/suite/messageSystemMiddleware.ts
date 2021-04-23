@@ -2,10 +2,11 @@ import { MiddlewareAPI } from 'redux';
 import { DEVICE, TRANSPORT } from 'trezor-connect';
 
 import { MESSAGE_SYSTEM, STORAGE, SUITE } from '@suite-actions/constants';
-import { AppState, Action, Dispatch } from '@suite-types';
 import { getValidMessages } from '@suite-utils/messageSystem';
 import { WALLET_SETTINGS } from '@suite/actions/settings/constants';
 import { saveValidMessages } from '@suite/actions/suite/messageSystemActions';
+
+import type { AppState, Action, Dispatch } from '@suite-types';
 
 // actions which can affect message system messages
 const actions = [

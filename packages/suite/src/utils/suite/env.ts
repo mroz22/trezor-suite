@@ -1,6 +1,6 @@
 import UAParser from 'ua-parser-js';
 
-import { SuiteThemeVariant, EnvironmentType } from '@suite-types';
+import type { SuiteThemeVariant, EnvironmentType } from '@suite-types';
 
 /* This way, we can override simple utils, which helps to polyfill methods which are not available in react-native. */
 export const getUserAgent = () => navigator?.userAgent || '';

@@ -1,7 +1,19 @@
 import * as semver from 'semver';
-import { TransportInfo } from 'trezor-connect';
 
 import {
+    getBrowserName,
+    getBrowserVersion,
+    getEnvironment,
+    getOsName,
+    getOsVersion,
+} from '@suite-utils/env';
+import { getFwVersion } from './device';
+
+import type { TransportInfo } from 'trezor-connect';
+
+import type { Network } from '@wallet-types';
+import type { TrezorDevice, EnvironmentType } from '@suite-types';
+import type {
     Duration,
     MessageSystem,
     Message,
@@ -13,16 +25,6 @@ import {
     Device,
     Environment,
 } from '@suite-types/messageSystem';
-import { Network } from '@wallet-types';
-import { TrezorDevice, EnvironmentType } from '@suite-types';
-import {
-    getBrowserName,
-    getBrowserVersion,
-    getEnvironment,
-    getOsName,
-    getOsVersion,
-} from '@suite-utils/env';
-import { getFwVersion } from './device';
 
 type CurrentSettings = {
     tor: boolean;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Message } from '@suite-types/messageSystem';
 import { isDesktop } from '@suite-utils/env';
 import { useSelector } from '@suite-hooks';
 import OnlineStatus from './OnlineStatus';
@@ -10,6 +9,8 @@ import UpdateFirmware from './UpdateFirmware';
 import NoBackup from './NoBackup';
 import FailedBackup from './FailedBackup';
 import MessageSystemBanner from './MessageSystemBanner';
+
+import type { Message } from '@suite-types/messageSystem';
 
 const Wrapper = styled.div`
     z-index: 3;

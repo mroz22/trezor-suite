@@ -1,4 +1,5 @@
 import { MiddlewareAPI } from 'redux';
+
 import { WALLET_SETTINGS } from '@settings-actions/constants';
 import {
     ACCOUNT,
@@ -12,12 +13,12 @@ import {
 import * as storageActions from '@suite-actions/storageActions';
 import * as accountUtils from '@wallet-utils/accountUtils';
 import { SUITE, ANALYTICS, METADATA, MESSAGE_SYSTEM } from '@suite-actions/constants';
-import { AppState, Action as SuiteAction, Dispatch } from '@suite-types';
-import { WalletAction } from '@wallet-types';
-
 import { getDiscovery } from '@wallet-actions/discoveryActions';
 import { isDeviceRemembered } from '@suite-utils/device';
 import { serializeDiscovery } from '@suite-utils/storage';
+
+import type { AppState, Action as SuiteAction, Dispatch } from '@suite-types';
+import type { WalletAction } from '@wallet-types';
 
 const storageMiddleware = (api: MiddlewareAPI<Dispatch, AppState>) => (next: Dispatch) => (
     action: SuiteAction | WalletAction,

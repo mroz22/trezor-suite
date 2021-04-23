@@ -1,6 +1,5 @@
 import * as jws from 'jws';
 
-import { Category, MessageSystem } from '@suite-types/messageSystem';
 import { MESSAGE_SYSTEM } from '@suite-actions/constants';
 import { Dispatch, GetState } from '@suite-types';
 import {
@@ -10,6 +9,8 @@ import {
     CONFIG_URL_LOCAL,
     VERSION,
 } from '@suite-actions/constants/messageSystemConstants';
+
+import type { Category, MessageSystem } from '@suite-types/messageSystem';
 
 export type MessageSystemAction =
     | { type: typeof MESSAGE_SYSTEM.FETCH_CONFIG_SUCCESS }
