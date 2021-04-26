@@ -2,9 +2,13 @@ import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import alias from '../utils/alias';
-import { assetPrefix, isDev, isAnalyzing, environment } from '../utils/env';
+import { assetPrefix, project, isDev, isAnalyzing } from '../utils/env';
+import { getRevision } from '../utils/git';
 import { generateCacheGroups } from '../utils/suite';
 
+import pkgFile from '../../suite-desktop/package.json';
+
+const gitRevision = getRevision();
 const suiteCacheGroups = generateCacheGroups([
     'components',
     'views',
@@ -19,18 +23,15 @@ const suiteCacheGroups = generateCacheGroups([
     'config',
     'storage',
 ]);
+
 const config: webpack.Configuration = {
-    mode: environment,
-    target: isDev ? 'web' : 'browserslist',
-    devtool: isDev ? 'eval-source-map' : false,
-    devServer: {
-        port: 3000,
-        hot: true, // Hot Module Reloading
-    },
+    mode: 'production',
+    target: 'browserslist',
+    devtool: false,
     output: {
         publicPath: `${assetPrefix}/`,
-        filename: isDev ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
-        chunkFilename: isDev ? 'js/[id].js' : 'js/[id].[contenthash:8].js',
+        filename: 'js/[name].[contenthash:8].js',
+        chunkFilename: 'js/[id].[contenthash:8].js',
         assetModuleFilename: `assets/[hash][ext][query]`,
         pathinfo: false,
     },
@@ -130,19 +131,24 @@ const config: webpack.Configuration = {
         ],
     },
     plugins: [
-        // new webpack.ProgressPlugin(),
+        new webpack.ProgressPlugin(),
+        new webpack.DefinePlugin({
+            'process.browser': true,
+            'process.env': JSON.stringify(process.env),
+            'process.env.SUITE_TYPE': JSON.stringify(project),
+            'process.env.VERSION': JSON.stringify(pkgFile.version),
+            'process.env.COMMITHASH': JSON.stringify(gitRevision),
+            'process.env.ASSET_PREFIX': JSON.stringify(assetPrefix),
+        }),
         new webpack.ProvidePlugin({
             Buffer: ['buffer', 'Buffer'],
             process: 'process',
         }),
-        ...(isAnalyzing
-            ? [
-                  new BundleAnalyzerPlugin({
-                      openAnalyzer: false,
-                  }),
-              ]
-            : []),
-    ],
+        isAnalyzing &&
+            new BundleAnalyzerPlugin({
+                openAnalyzer: false,
+            }),
+    ].filter(Boolean),
 };
 
 export default config;

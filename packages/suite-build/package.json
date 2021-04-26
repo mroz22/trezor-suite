@@ -10,16 +10,20 @@
     "license": "SEE LICENSE IN LICENSE.md",
     "description": "trezor suite build",
     "scripts": {
-        "dev:web": "TS_NODE_PROJECT=\"tsconfig.json\" webpack serve --config ./configs/web.webpack.config.ts --progress",
-        "build:web": "NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack --config ./configs/web.webpack.config.ts --progress",
-        "dev:desktop": "TS_NODE_PROJECT=\"tsconfig.json\" webpack serve --config ./configs/desktop.webpack.config.ts --progress",
-        "build:desktop": "NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack --config ./configs/desktop.webpack.config.ts --progress",
+        "patch": "yarn patch-package",
+        "base": "TS_NODE_PROJECT=\"tsconfig.json\" wp --config ./webpack.config.ts",
+        "web": "PROJECT=web yarn run base",
+        "dev:web": "yarn run web",
+        "build:web": "NODE_ENV=production yarn run web",
+        "desktop": "PROJECT=desktop yarn run base",
+        "dev:desktop": "yarn run desktop",
+        "build:desktop": "NODE_ENV=production yarn run desktop",
         "lint": "eslint '**/*{.ts,.tsx}'",
         "type-check": "tsc --project tsconfig.json",
         "type-check:watch": "yarn type-check -- --watch"
     },
     "dependencies": {
-        "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0-beta.4",
         "babel-loader": "^8.2.2",
         "babel-plugin-styled-components": "1.12.0",
         "buffer": "^6.0.3",
@@ -40,6 +44,7 @@
         "webpack-bundle-analyzer": "^4.4.0",
         "webpack": "^5.28.0",
         "webpack-merge": "^5.7.3",
+        "webpack-plugin-serve": "^1.4.1",
         "webpack-pwa-manifest": "^4.3.0",
         "workbox-webpack-plugin": "^6.1.2",
         "worker-loader": "^3.0.8"
@@ -48,7 +53,7 @@
         "@types/copy-webpack-plugin": "^6.4.1",
         "@types/webpack": "^5.0.0",
         "@types/webpack-bundle-analyzer": "^3.9.2",
-        "@types/webpack-dev-server": "^3.11.3",
+        "@types/webpack-plugin-serve": "^1.4.0",
         "@types/workbox-webpack-plugin": "^5.1.6"
     }
 }

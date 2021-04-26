@@ -1,6 +1,5 @@
 import path from 'path';
 import webpack from 'webpack';
-import { merge } from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WorkboxPlugin from 'workbox-webpack-plugin';
@@ -8,19 +7,13 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import routes from '../../suite/src/config/suite/routes';
 import { FLAGS } from '../../suite/src/config/suite/features';
-import pkgFile from '../../suite-web/package.json';
 
-import base from './base.webpack.config';
 import { assetPrefix, isDev } from '../utils/env';
-import { getRevision } from '../utils/git';
+import { getPathForProject } from '../utils/path';
 
-const gitRevision = getRevision();
-const baseDir = path.join(__dirname, '..', '..', 'suite-web');
-
-const config: webpack.Configuration = merge(base, {
-    entry: {
-        app: path.join(baseDir, 'src', 'index.tsx'),
-    },
+const baseDir = getPathForProject('web');
+const config: webpack.Configuration = {
+    entry: [path.join(baseDir, 'src', 'index.ts')],
     output: {
         path: path.join(baseDir, 'build'),
     },
@@ -45,14 +38,6 @@ const config: webpack.Configuration = merge(base, {
         ],
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.browser': true,
-            'process.env': JSON.stringify(process.env),
-            'process.env.SUITE_TYPE': JSON.stringify('web'),
-            'process.env.VERSION': JSON.stringify(pkgFile.version),
-            'process.env.COMMITHASH': JSON.stringify(gitRevision),
-            'process.env.ASSET_PREFIX': JSON.stringify(assetPrefix),
-        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -93,46 +78,41 @@ const config: webpack.Configuration = merge(base, {
             filename: path.join(baseDir, 'build', '404.html'),
         }),
         // PWA
-        ...(FLAGS.PWA
-            ? [
-                  new WorkboxPlugin.GenerateSW({
-                      swDest: 'sw.js',
-                      clientsClaim: true,
-                      skipWaiting: true,
-                      maximumFileSizeToCacheInBytes: 10 * 1000 * 1000,
-                      runtimeCaching: [
-                          {
-                              urlPattern: /.*\.js(.map)?$/,
-                              handler: 'NetworkFirst',
-                              options: {
-                                  cacheName: 'js-cache',
-                              },
-                          },
-                          {
-                              urlPattern: '/(news|connect).trezor.io/',
-                              handler: 'NetworkFirst',
-                              options: {
-                                  cacheName: 'api-cache',
-                              },
-                          },
-                          {
-                              urlPattern: /\.(gif|jpe?g|png|svg)$/,
-                              handler: 'CacheFirst',
-                              options: {
-                                  cacheName: 'image-cache',
-                                  cacheableResponse: {
-                                      statuses: [0, 200],
-                                  },
-                              },
-                          },
-                      ],
-                  }),
-              ]
-            : []),
-        ...(isDev
-            ? [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()]
-            : []),
-    ],
-});
+        FLAGS.PWA &&
+            new WorkboxPlugin.GenerateSW({
+                swDest: 'sw.js',
+                clientsClaim: true,
+                skipWaiting: true,
+                maximumFileSizeToCacheInBytes: 10 * 1000 * 1000,
+                runtimeCaching: [
+                    {
+                        urlPattern: /.*\.js(.map)?$/,
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'js-cache',
+                        },
+                    },
+                    {
+                        urlPattern: '/(news|connect).trezor.io/',
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'api-cache',
+                        },
+                    },
+                    {
+                        urlPattern: /\.(gif|jpe?g|png|svg)$/,
+                        handler: 'CacheFirst',
+                        options: {
+                            cacheName: 'image-cache',
+                            cacheableResponse: {
+                                statuses: [0, 200],
+                            },
+                        },
+                    },
+                ],
+            }),
+        isDev && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean), // Filters out disabled plugins
+};
 
-module.exports = config;
+export default config;

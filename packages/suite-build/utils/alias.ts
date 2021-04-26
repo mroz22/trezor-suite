@@ -1,4 +1,5 @@
 import path from 'path';
+
 import { compilerOptions } from '../../../tsconfig.json';
 
 const { paths } = compilerOptions;
