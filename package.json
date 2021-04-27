@@ -18,7 +18,7 @@
     },
     "scripts": {
         "bootstrap": "lerna bootstrap",
-        "postinstall": "yarn lerna run patch",
+        "postinstall": "yarn run patch && yarn lerna run patch",
         "patch": "yarn patch-package",
         "build:libs": "lerna run build:lib",
         "build:connect": "rimraf packages/suite-data/files/connect && yarn webpack --config packages/suite-data/trezor-connect.webpack.js",
