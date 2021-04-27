@@ -57,7 +57,7 @@ const analytics = (api: MiddlewareAPI<Dispatch, AppState>) => (next: Dispatch) =
                                     .devices.filter(d => d.remember && !d.useEmptyPassphrase)
                                     .length,
                                 theme: state.suite.settings.theme.variant,
-                                suiteVersion: process.env.version || '',
+                                suiteVersion: process.env.VERSION || '',
                             },
                         },
                         // force logging if analytics are enabled (may happen that reducers are not yet populated with data from this action)
