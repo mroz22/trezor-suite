@@ -1,4 +1,3 @@
-import { render } from 'react-dom';
 import UAParser from 'ua-parser-js';
 
 import style from './styles/browser-detect.css';
@@ -151,8 +150,16 @@ window.onload = () => {
         // Unsupported browser
         setBody(unsupportedBrowser);
     } else {
-        import(/* webpackChunkName: "app" */ './Main').then(component => {
-            render(component.default, document.getElementById('app'));
-        });
+        Promise.all([
+            import(/* webpackChunkName: "react-dom" */ 'react-dom'),
+            import(/* webpackChunkName: "app" */ './Main'),
+        ])
+            .then(([rd, comp]) => {
+                rd.render(comp.default, document.getElementById('app'));
+            })
+            .catch(err => {
+                // Fatal error
+                console.log(err);
+            });
     }
 };

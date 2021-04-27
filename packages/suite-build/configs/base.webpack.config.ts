@@ -146,7 +146,8 @@ const config: webpack.Configuration = {
         }),
         isAnalyzing &&
             new BundleAnalyzerPlugin({
-                openAnalyzer: false,
+                openAnalyzer: true,
+                analyzerMode: isDev ? 'server' : 'static',
             }),
     ].filter(Boolean),
 };
