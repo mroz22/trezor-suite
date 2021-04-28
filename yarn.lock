@@ -4909,7 +4909,7 @@
   resolved "https://registry.yarnpkg.com/@types/http-cache-semantics/-/http-cache-semantics-4.0.0.tgz#9140779736aa2655635ee756e2467d787cfe8a2a"
   integrity sha512-c3Xy026kOF7QOTn00hbIllV1dLR9hG9NkSrLQgCVs8NF6sBU+VGWjD3wLPhmh1TYAc7ugCFsvHYMN4VcBN1U1A==
 
-"@types/invity-api@^1.0.3":
+"@types/invity-api@^1.0.2":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@types/invity-api/-/invity-api-1.0.3.tgz#2632a0fe35454384f655004fe09363378524b788"
   integrity sha512-gBBqQBa7FUTgRovMbPu+OFr672gyZYU+0/ahhIscoCCREtN4K4qkk8rqt29ok5yztfWPp0NPdK8vxjz/jFx8/Q==
