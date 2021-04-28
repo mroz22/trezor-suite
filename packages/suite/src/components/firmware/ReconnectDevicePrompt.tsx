@@ -169,7 +169,7 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
                 <Translation id="TR_INSTALL" />
             </Button>
         ) : (
-            <Button onClick={() => {}} data-test="@firmware/install-button">
+            <Button onClick={() => { }} data-test="@firmware/install-button">
                 <Translation id="TR_CONTINUE" />
             </Button>
         );
@@ -178,7 +178,7 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
 
     return (
         <Overlay desktopBorder={isDesktop() && !isMac() ? DESKTOP_WRAPPER_BORDER_WIDTH : undefined}>
-            <Wrapper>
+            <Wrapper data-test={`@firmware/reconnect-device/${requestedMode}`}>
                 <StyledDeviceAnimation type={animation} size={200} borderRadius="30px" loop />
                 <Content>
                     <Heading>
