@@ -45,8 +45,8 @@ const config: webpack.Configuration = {
                     to: path.join(baseDir, 'build', 'static'),
                 },
                 {
-                    from: path.join(baseDir, 'src', 'static', 'manifest.json'),
-                    to: path.join(baseDir, 'build', 'manifest.json'),
+                    from: path.join(baseDir, 'src', 'static', 'app.webmanifest'),
+                    to: path.join(baseDir, 'build', 'app.webmanifest'),
                     transform: (content: any) =>
                         content.toString().replace(/\{assetPrefix\}/g, assetPrefix),
                 },
