@@ -2,9 +2,9 @@
  * Auto Updater feature (notify, download, install)
  */
 
-import { unlinkSync } from 'fs';
+import { unlinkSync, unlink } from 'fs';
 import { app, ipcMain } from 'electron';
-import { autoUpdater, CancellationToken, UpdateInfo } from 'electron-updater';
+import { autoUpdater, CancellationToken, UpdateInfo, UpdateDownloadedEvent } from 'electron-updater';
 import isDev from 'electron-is-dev';
 
 import { b2t } from '@desktop-electron/libs/utils';
@@ -127,7 +127,7 @@ const init = ({ mainWindow, store }: Dependencies) => {
         mainWindow.webContents.send('update/downloading', { ...progressObj });
     });
 
-    autoUpdater.on('update-downloaded', (info: any) => {
+    autoUpdater.on('update-downloaded', (info: UpdateDownloadedEvent) => {
         const { version, releaseDate, downloadedFile } = info;
 
         logger.info('auto-updater', [
@@ -155,7 +155,16 @@ const init = ({ mainWindow, store }: Dependencies) => {
                 mainWindow.webContents.send('update/error', err);
 
                 // Delete file so we are sure it's not accidentally installed
-                unlinkSync(downloadedFile);
+                // unlinkSync(downloadedFile);
+                return unlink(downloadedFile, (err) => {
+                    if (err) {
+                        logger.error('auto-updater', `VerifySignature failed: ${err}`);
+                        throw err;
+                    };
+                    logger.info('auto-updater', 'VerifySignature unlink finished');
+                });
+            }).finally(() => {
+                logger.info('auto-updater', 'VerifySignature finished');
             });
     });
 
