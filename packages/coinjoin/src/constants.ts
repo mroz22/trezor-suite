@@ -3,3 +3,7 @@ export const STATUS_TIMEOUT = {
     enabled: 30000, // account is registered but utxo was not paired with Round
     registered: 10000, // utxo is registered in Round
 } as const;
+
+export const FILTERS_BATCH_SIZE = 100;
+
+export const DISCOVERY_LOOKOUT = 20;
