@@ -76,7 +76,7 @@ describe(`CoinjoinBackend methods`, () => {
             }),
         );
 
-        const info = getAccountInfo({
+        const info = await getAccountInfo({
             descriptor: FIXTURES.SEGWIT_RECEIVE_ADDRESSES[0],
             network: networks.regtest,
             transactions: txs.concat(pending),
@@ -104,7 +104,7 @@ describe(`CoinjoinBackend methods`, () => {
             }),
         );
 
-        const info = getAccountInfo({
+        const info = await getAccountInfo({
             descriptor: FIXTURES.SEGWIT_XPUB,
             network: networks.regtest,
             transactions: txs.concat(pending),
@@ -137,7 +137,7 @@ describe(`CoinjoinBackend methods`, () => {
             }),
         );
 
-        const halfInfo = getAccountInfo({
+        const halfInfo = await getAccountInfo({
             descriptor: FIXTURES.SEGWIT_XPUB,
             network: networks.regtest,
             transactions: txs.concat(half.pending),
@@ -175,7 +175,7 @@ describe(`CoinjoinBackend methods`, () => {
             }),
         );
 
-        const fullInfo = getAccountInfo({
+        const fullInfo = await getAccountInfo({
             descriptor: FIXTURES.SEGWIT_XPUB,
             network: networks.regtest,
             transactions: txs.concat(full.pending),
