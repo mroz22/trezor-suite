@@ -7457,4 +7457,37 @@ export default defineMessages({
         id: 'TR_PAUSING',
         defaultMessage: 'Pausing',
     },
+    TR_COINJOIN_RUNNING: {
+        id: 'TR_COINJOIN_RUNNING',
+        defaultMessage: 'Coinjoin running',
+    },
+    TR_DO_NOT_DISCONNECT_DEVICE: {
+        id: 'TR_DO_NOT_DISCONNECT_DEVICE',
+        defaultMessage: "Don't disconnect your device",
+    },
+    TR_CONNECT_UNLOCK_DEVICE: {
+        id: 'TR_CONNECT_UNLOCK_DEVICE',
+        defaultMessage: 'Please Connect & Unlock your device',
+    },
+    TR_COINJOIN_CONNECT_DEVICE_WARNING: {
+        id: 'TR_COINJOIN_CONNECT_DEVICE_WARNING',
+        defaultMessage:
+            'Otherwise, you will spoil CoinJoin for other participants. Therefore, <b>you will be temporarily blocked</b> from accessing the CoinJoin functionality',
+    },
+    TR_DISMISS: {
+        id: 'TR_DISMISS',
+        defaultMessage: 'Dismiss',
+    },
+    TR_VIEW_ACCOUNT: {
+        id: 'TR_VIEW_ACCOUNT',
+        defaultMessage: 'View account',
+    },
+    TR_COINJOIN_COMPLETED: {
+        id: 'TR_COINJOIN_COMPLETED',
+        defaultMessage: 'Coinjoin successfully completed!',
+    },
+    TR_ANONYMIZED_AMOUNT: {
+        id: 'TR_ANONYMIZED_AMOUNT',
+        defaultMessage: 'You have anonymized {amount}',
+    },
 });

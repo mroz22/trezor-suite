@@ -144,6 +144,18 @@ export type UserContextPayload =
       }
     | {
           type: 'cancel-coinjoin';
+      }
+    | {
+          type: 'critical-coinjoin-phase';
+          relatedAccountKey: string;
+      }
+    | {
+          type: 'reconnect-coinjoin-device';
+          relatedDeviceState: string;
+      }
+    | {
+          type: 'coinjoin-success';
+          relatedAccountKey: string;
       };
 
 export type ModalAction =
