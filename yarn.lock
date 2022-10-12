@@ -6478,6 +6478,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@suite-native/assets@*, @suite-native/assets@workspace:suite-native/assets":
+  version: 0.0.0-use.local
+  resolution: "@suite-native/assets@workspace:suite-native/assets"
+  dependencies:
+    "@react-navigation/native": ^6.0.11
+    "@reduxjs/toolkit": ^1.8.3
+    "@suite-common/formatters": "*"
+    "@suite-common/wallet-config": "*"
+    "@suite-common/wallet-core": "*"
+    "@suite-common/wallet-types": "*"
+    "@suite-common/wallet-utils": "*"
+    "@suite-native/atoms": "*"
+    "@suite-native/navigation": "*"
+    "@trezor/icons": "*"
+    "@trezor/styles": "*"
+    bignumber.js: ^9.1.0
+    react: ^17.0.2
+    react-native: 0.68.2
+    react-redux: 7.2.2
+  languageName: unknown
+  linkType: soft
+
 "@suite-native/atoms@*, @suite-native/atoms@workspace:suite-native/atoms":
   version: 0.0.0-use.local
   resolution: "@suite-native/atoms@workspace:suite-native/atoms"
@@ -6643,6 +6665,9 @@ __metadata:
     "@suite-common/formatters": "*"
     "@suite-common/wallet-config": "*"
     "@suite-common/wallet-core": "*"
+    "@suite-common/wallet-types": "*"
+    "@suite-common/wallet-utils": "*"
+    "@suite-native/assets": "*"
     "@suite-native/atoms": "*"
     "@suite-native/module-graph": "*"
     "@suite-native/module-settings": "*"

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { AssetItem, Button, Card, VStack } from '@suite-native/atoms';
+import { Button, Text, Card, VStack, DashboardSection } from '@suite-native/atoms';
 import { prepareNativeStyle, useNativeStyles } from '@trezor/styles';
 import {
     AppTabsParamList,
@@ -16,7 +17,8 @@ import {
 } from '@suite-native/navigation';
 import { NetworkSymbol } from '@suite-common/wallet-config';
 
-import { DashboardSection } from './DashboardSection';
+import { AssetItem } from './AssetItem';
+import { selectAssetsData } from '../selectors';
 
 const importStyle = prepareNativeStyle(_ => ({
     marginTop: 12,
@@ -31,6 +33,7 @@ type HomeAssetsNavigationProp = TabToStackCompositeNavigationProp<
 export const Assets = () => {
     const navigation = useNavigation<HomeAssetsNavigationProp>();
     const { applyStyle } = useNativeStyles();
+    const assetsData = useSelector(selectAssetsData);
 
     const handleImportAssets = () => {
         navigation.navigate(RootStackRoutes.AccountsImport, {
@@ -54,26 +57,20 @@ export const Assets = () => {
         <DashboardSection title="Assets">
             <Card>
                 <VStack spacing={19}>
-                    <AssetItem
-                        iconName="btc"
-                        cryptoCurrencyName="Bitcoin"
-                        cryptoCurrencySymbol="btc"
-                        cryptoCurrencyValue={0.00005122}
-                        portfolioPercentage={70}
-                        fiatCurrencyValue={3123}
-                        onPress={() => handleShowAllAccountsForAsset('btc')}
-                    />
-                    <AssetItem
-                        iconName="test"
-                        cryptoCurrencyName="Testnet"
-                        cryptoCurrencySymbol="test"
-                        cryptoCurrencyValue={0.00005122}
-                        portfolioPercentage={30}
-                        fiatCurrencyValue={3123}
-                        onPress={() => handleShowAllAccountsForAsset('test')}
-                    />
+                    {assetsData.map(asset => (
+                        <AssetItem
+                            key={asset.symbol}
+                            iconName={asset.symbol}
+                            cryptoCurrencyName={asset.symbol}
+                            cryptoCurrencySymbol={asset.symbol}
+                            fiatBalance={asset.fiatBalance}
+                            cryptoCurrencyValue={asset.assetBalance.toFixed()}
+                            onPress={() => handleShowAllAccountsForAsset(asset.symbol)}
+                        />
+                    ))}
                 </VStack>
             </Card>
+            <Text>Total</Text>
             <View style={applyStyle(importStyle)}>
                 <Button colorScheme="gray" iconName="plus" onPress={handleImportAssets}>
                     Import Assets
