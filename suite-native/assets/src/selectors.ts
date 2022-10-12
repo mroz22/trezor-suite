@@ -6,8 +6,6 @@ import { Account } from '@suite-common/wallet-types';
 import { networksCompatibility, NetworkSymbol } from '@suite-common/wallet-config';
 import { toFiatCurrency } from '@suite-common/wallet-utils';
 
-import { FIAT_CURRENCY_VALUE } from './components/AssetItem';
-
 type Assets = Record<string, Account[]>;
 
 interface AssetType {
@@ -54,14 +52,15 @@ export const selectAssetsData = createSelector(
                 );
                 const fiatBalance = toFiatCurrency(
                     assetBalance.toString(),
-                    FIAT_CURRENCY_VALUE,
+                    'usd', // TODO get from selector
                     currentFiatRates?.rates,
                 );
+
                 return {
                     symbol,
                     network,
                     assetBalance,
-                    fiatBalance,
+                    fiatBalance: fiatBalance ?? 0,
                 };
             })
             .filter(data => data !== undefined) as unknown as AssetType[],
