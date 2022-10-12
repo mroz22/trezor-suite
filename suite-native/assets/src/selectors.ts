@@ -5,6 +5,7 @@ import { selectAccounts, selectCoins } from '@suite-common/wallet-core';
 import { Account } from '@suite-common/wallet-types';
 import { networksCompatibility, NetworkSymbol } from '@suite-common/wallet-config';
 import { toFiatCurrency } from '@suite-common/wallet-utils';
+import { selectFiatCurrency } from '@suite-native/module-settings';
 
 type Assets = Record<string, Account[]>;
 
@@ -30,8 +31,8 @@ export const selectAssets = createSelector(selectAccounts, accounts => {
 export const selectNetworks = createSelector(selectAssets, assets => Object.keys(assets));
 
 export const selectAssetsData = createSelector(
-    [selectNetworks, selectAssets, selectCoins],
-    (networks, assets, coins): AssetType[] =>
+    [selectNetworks, selectAssets, selectCoins, selectFiatCurrency],
+    (networks, assets, coins, fiatCurrency): AssetType[] =>
         networks
             .map(symbol => {
                 const network = networksCompatibility.find(
@@ -52,7 +53,7 @@ export const selectAssetsData = createSelector(
                 );
                 const fiatBalance = toFiatCurrency(
                     assetBalance.toString(),
-                    'usd', // TODO get from selector
+                    fiatCurrency.label,
                     currentFiatRates?.rates,
                 );
 
