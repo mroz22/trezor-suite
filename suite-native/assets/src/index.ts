@@ -1,2 +1,2 @@
 export * from './components/Assets';
-export * from './selectors';
+export * from './assetsSelectors';

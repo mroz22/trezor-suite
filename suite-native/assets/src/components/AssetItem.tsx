@@ -22,6 +22,8 @@ const assetItemWrapperStyle = prepareNativeStyle(() => ({
 }));
 
 const assetContentStyle = prepareNativeStyle(() => ({
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     flex: 1,
     marginLeft: 10,
@@ -50,9 +52,9 @@ export const AssetItem = ({
                         alignItems="center"
                     >
                         <Text>{cryptoCurrencyName}</Text>
-                        <Text>{FiatAmountFormatter.format(fiatBalance)}</Text>
                     </Box>
-                    <Box flexDirection="row" flex={1} justifyContent="flex-end" alignItems="center">
+                    <Box alignItems="flex-end">
+                        <Text>{FiatAmountFormatter.format(fiatBalance)}</Text>
                         <Text variant="hint" color="gray600">
                             <>{`${CryptoAmountFormatter.format(cryptoCurrencyValue, {
                                 symbol: cryptoCurrencySymbol,

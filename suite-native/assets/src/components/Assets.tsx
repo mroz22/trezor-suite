@@ -18,7 +18,7 @@ import {
 import { NetworkSymbol } from '@suite-common/wallet-config';
 
 import { AssetItem } from './AssetItem';
-import { selectAssetsData } from '../selectors';
+import { selectAssetsWithBalances } from '../assetsSelectors';
 
 const importStyle = prepareNativeStyle(_ => ({
     marginTop: 12,
@@ -33,7 +33,7 @@ type HomeAssetsNavigationProp = TabToStackCompositeNavigationProp<
 export const Assets = () => {
     const navigation = useNavigation<HomeAssetsNavigationProp>();
     const { applyStyle } = useNativeStyles();
-    const assetsData = useSelector(selectAssetsData);
+    const assetsData = useSelector(selectAssetsWithBalances);
 
     const handleImportAssets = () => {
         navigation.navigate(RootStackRoutes.AccountsImport, {
@@ -70,7 +70,6 @@ export const Assets = () => {
                     ))}
                 </VStack>
             </Card>
-            <Text>Total</Text>
             <View style={applyStyle(importStyle)}>
                 <Button colorScheme="gray" iconName="plus" onPress={handleImportAssets}>
                     Import Assets
