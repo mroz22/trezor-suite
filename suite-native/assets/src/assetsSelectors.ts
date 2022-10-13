@@ -51,17 +51,18 @@ export const selectAssetsWithBalances = createSelector(
                     f => f.symbol.toLowerCase() === symbol.toLowerCase(),
                 )?.current;
 
-                const assetBalance =
-                    assets[symbol]?.reduce(
-                        (prev, formattedBalance) => prev.plus(formattedBalance),
-                        new BigNumber(0),
-                    ) ?? new BigNumber(0);
+                const assetBalance = assets[symbol]?.reduce(
+                    (prev, formattedBalance) => prev.plus(formattedBalance),
+                    new BigNumber(0),
+                );
 
                 const fiatBalance = toFiatCurrency(
                     assetBalance?.toString() ?? '0',
                     fiatCurrency.label,
                     currentFiatRates?.rates,
                 );
+
+                if (!assetBalance) return;
 
                 const asset: AssetType = {
                     symbol,

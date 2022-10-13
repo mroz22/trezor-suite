@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Button, Text, Card, VStack, DashboardSection } from '@suite-native/atoms';
+import { Button, Card, DashboardSection, VStack } from '@suite-native/atoms';
 import { prepareNativeStyle, useNativeStyles } from '@trezor/styles';
 import {
     AppTabsParamList,
