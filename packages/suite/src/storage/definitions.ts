@@ -1,7 +1,7 @@
 import type { DBSchema } from 'idb';
 
 import type { StorageUpdateMessage } from '@trezor/suite-storage';
-import type { BackendSettings, WalletSettings } from '@suite-common/wallet-types';
+import type { BackendSettings, WalletSettings, CoinjoinAccount } from '@suite-common/wallet-types';
 import type { SuiteState } from '@suite-reducers/suiteReducer';
 import type { AnalyticsState } from '@suite-reducers/analyticsReducer';
 import type { FormState } from '@wallet-types/sendForm';
@@ -10,7 +10,7 @@ import type { MetadataState } from '@suite-types/metadata';
 import type { GraphData } from '@wallet-types/graph';
 import type { Trade } from '@wallet-types/coinmarketCommonTypes';
 import type { MessageSystem } from '@trezor/message-system';
-import type { MessageState } from '@suite/reducers/suite/messageSystemReducer';
+import type { MessageState } from '@suite-reducers/messageSystemReducer';
 import type { FormDraft } from '@wallet-types/form';
 import type {
     Account,
@@ -66,6 +66,10 @@ export interface SuiteDBSchema extends DBSchema {
         indexes: {
             deviceState: string;
         };
+    };
+    coinjoinAccounts: {
+        key: string; // accountKey
+        value: CoinjoinAccount;
     };
     discovery: {
         key: string;
