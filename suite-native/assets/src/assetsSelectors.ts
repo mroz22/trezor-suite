@@ -15,27 +15,25 @@ interface AssetType {
     fiatBalance: string;
 }
 
-export const selectAssetsFromGroupedAccounts = createSelector(
-    selectAccounts,
-    (accounts): Assets => {
-        const assets: Assets = {};
-        accounts.forEach(account => {
-            if (!assets[account.symbol]) {
-                assets[account.symbol] = [];
-            }
-            assets[account.symbol]?.push(account.formattedBalance);
-        });
-        return assets;
-    },
-);
+export const selectBalancesPerNetwork = createSelector(selectAccounts, (accounts): Assets => {
+    const assets: Assets = {};
+    accounts.forEach(account => {
+        if (!assets[account.symbol]) {
+            assets[account.symbol] = [];
+        }
+        assets[account.symbol]?.push(account.formattedBalance);
+    });
+
+    return assets;
+});
 
 export const selectNetworksWithAssets = createSelector(
-    selectAssetsFromGroupedAccounts,
+    selectBalancesPerNetwork,
     (assets: Assets): NetworkSymbol[] => Object.keys(assets) as NetworkSymbol[],
 );
 
 export const selectAssetsWithBalances = createSelector(
-    [selectNetworksWithAssets, selectAssetsFromGroupedAccounts, selectCoins, selectFiatCurrency],
+    [selectNetworksWithAssets, selectBalancesPerNetwork, selectCoins, selectFiatCurrency],
     (networks, assets, coins, fiatCurrency): AssetType[] =>
         networks
             .map((symbol: NetworkSymbol) => {
