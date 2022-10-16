@@ -25,7 +25,7 @@ export interface AnalyzeExternalVinVout {
     value: number;
 }
 
-export interface AnalyzeTransactionParams {
+export interface AnalyzeTransactionDetails {
     internalInputs: AnalyzeInternalVinVout[];
     internalOutputs: AnalyzeInternalVinVout[];
     externalInputs: AnalyzeExternalVinVout[];
