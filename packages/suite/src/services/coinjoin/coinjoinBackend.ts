@@ -1,7 +1,7 @@
 import { CoinjoinBackend } from '@trezor/coinjoin';
 import { createIpcProxy } from '@trezor/ipc-proxy';
 import { isDesktop } from '@suite-utils/env';
-import { Account, CoinjoinServerEnvironment } from '@suite-common/wallet-types';
+import { CoinjoinServerEnvironment } from '@suite-common/wallet-types';
 import { COINJOIN_NETWORKS } from './config';
 
 const loadInstance = (network: string, environment?: CoinjoinServerEnvironment) => {
