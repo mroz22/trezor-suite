@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { variables, Select, Input, Button } from '@trezor/components';
 import { Card } from '@suite-components';
 import { useSelector } from '@suite-hooks';
-import { REGTEST_URL } from '@suite/services/coinjoin/config';
+import { COINJOIN_SERVERS } from '@suite/services/coinjoin/config';
 import type { AccountAddress } from '@trezor/connect';
 
 const StyledCard = styled(Card)`
@@ -21,24 +21,24 @@ const Row = styled.div`
     padding-bottom: 10px;
 `;
 
-export const generateBlock = () =>
-    fetch(`${REGTEST_URL}generate_block`, {
+export const generateBlock = (url: string) =>
+    fetch(`${url}generate_block`, {
         method: 'GET',
     });
 
-export const startAutoBlockGen = () =>
-    fetch(`${REGTEST_URL}start_generating_blocks_automatically`, {
+export const startAutoBlockGen = (url: string) =>
+    fetch(`${url}start_generating_blocks_automatically`, {
         method: 'POST',
         body: 'interval_in_seconds=10',
     });
 
-export const stopAutoBlockGen = () =>
-    fetch(`${REGTEST_URL}stop_generating_blocks_automatically`, {
+export const stopAutoBlockGen = (url: string) =>
+    fetch(`${url}stop_generating_blocks_automatically`, {
         method: 'POST',
     });
 
-export const sendToAddress = (address: string, amount: string) =>
-    fetch(`${REGTEST_URL}send_to_address`, {
+export const sendToAddress = (url: string, address: string, amount: string) =>
+    fetch(`${url}send_to_address`, {
         method: 'POST',
         body: new URLSearchParams({
             address,
@@ -55,9 +55,14 @@ const buildAddressOption = (address: AccountAddress) =>
 type Option = ReturnType<typeof buildAddressOption>;
 
 export const Faucet = () => {
-    const selectedAccount = useSelector(state => state.wallet.selectedAccount);
+    const { selectedAccount, env } = useSelector(state => ({
+        selectedAccount: state.wallet.selectedAccount,
+        env: state.suite.settings.debug.coinjoinServerEnvironment,
+    }));
     const amountRef = useRef<HTMLInputElement | null>(null);
     const [address, setAddress] = useState<Option | null>(null);
+    const serverUrl =
+        env === 'localhost' ? COINJOIN_SERVERS.regtest.localhost : COINJOIN_SERVERS.regtest.public;
 
     if (!selectedAccount.account || !selectedAccount.account.addresses) return null;
     if (selectedAccount.account.accountType !== 'coinjoin') return null;
@@ -88,7 +93,7 @@ export const Faucet = () => {
                     disabled={!selected}
                     onClick={() => {
                         if (selected && amountRef.current?.value) {
-                            sendToAddress(selected.value, amountRef.current?.value);
+                            sendToAddress(serverUrl, selected.value, amountRef.current?.value);
                         }
                     }}
                     data-test="@wallet/coinjoin/faucet/send"
@@ -98,19 +103,19 @@ export const Faucet = () => {
             </Row>
             <Row>
                 <Button
-                    onClick={() => generateBlock()}
+                    onClick={() => generateBlock(serverUrl)}
                     data-test="@wallet/coinjoin/faucet/mine-block"
                 >
                     Generate block
                 </Button>
                 {/* <Button
-                    onClick={() => startAutoBlockGen()}
+                    onClick={() => startAutoBlockGen(serverUrl)}
                     data-test="@wallet/coinjoin/faucet/start-auto-block-gen"
                 >
                     Start auto generate block
                 </Button>
                 <Button
-                    onClick={() => stopAutoBlockGen()}
+                    onClick={() => stopAutoBlockGen(serverUrl)}
                     data-test="@wallet/coinjoin/faucet/stop-auto-block-gen"
                 >
                     Stop auto generate block
