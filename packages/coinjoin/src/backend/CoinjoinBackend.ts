@@ -1,7 +1,5 @@
 import { EventEmitter } from 'events';
 
-import { networks } from '@trezor/utxo-lib';
-
 import { CoinjoinBackendClient } from './CoinjoinBackendClient';
 import { CoinjoinFilterController } from './CoinjoinFilterController';
 import { CoinjoinMempoolController } from './CoinjoinMempoolController';
@@ -9,6 +7,7 @@ import { DISCOVERY_LOOKOUT } from '../constants';
 import { scanAccount } from './scanAccount';
 import { scanAddress } from './scanAddress';
 import { getAccountInfo } from './getAccountInfo';
+import { getNetwork } from '../utils/settingsUtils';
 import type { CoinjoinBackendSettings } from '../types';
 import type {
     ScanAddressParams,
@@ -41,7 +40,7 @@ export class CoinjoinBackend extends EventEmitter {
     constructor(settings: CoinjoinBackendSettings) {
         super();
         this.settings = Object.freeze(settings);
-        this.network = this.getNetwork(settings.network);
+        this.network = getNetwork(settings.network);
         this.client = new CoinjoinBackendClient(settings);
         this.mempool = new CoinjoinMempoolController(this.client);
     }
@@ -100,17 +99,6 @@ export class CoinjoinBackend extends EventEmitter {
 
     cancel() {
         this.abortController?.abort();
-    }
-
-    private getNetwork(network: CoinjoinBackendSettings['network']) {
-        switch (network) {
-            case 'regtest':
-                return networks.regtest;
-            default:
-                throw new Error(
-                    'Other coins than REGTEST are currently not supported for CoinJoin',
-                );
-        }
     }
 
     private getInitialCheckpoint(): ScanAccountCheckpoint {

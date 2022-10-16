@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 
 import { Status } from './Status';
 import { selectRound, finishCurrentProcess, processRounds, resolveRequests } from './phase';
+import { getNetwork } from '../utils/settingsUtils';
 import { registerAccount } from './account';
 import {
     CoinjoinClientSettings,
@@ -32,6 +33,7 @@ export declare interface CoinjoinClient {
 
 export class CoinjoinClient extends EventEmitter {
     readonly settings: CoinjoinClientSettings;
+    private network;
     private abortController: AbortController; // used for interruption
     private accounts: RegisteredAccount[]; // list of registered accounts
     private activeRounds: ActiveRound[]; // list of active rounds
@@ -43,6 +45,7 @@ export class CoinjoinClient extends EventEmitter {
     constructor(settings: CoinjoinClientSettings) {
         super();
         this.settings = Object.freeze(settings);
+        this.network = getNetwork(settings.network);
         this.abortController = new AbortController();
         this.accounts = [];
         this.activeRounds = [];
