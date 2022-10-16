@@ -15,25 +15,26 @@ export type SelectUtxo = {
     anonymitySet: number;
 };
 
-interface AnalyzeTransactionVin {
-    publicKey: string;
+export interface AnalyzeInternalVinVout {
+    address: string;
     value: number;
 }
 
-interface AnalyzeTransactionVout extends AnalyzeTransactionVin {
+export interface AnalyzeExternalVinVout {
     scriptPubKey: string;
+    value: number;
 }
 
-export interface AnalyzeTransaction {
-    internalInputs: AnalyzeTransactionVin[];
-    internalOutputs: AnalyzeTransactionVout[];
-    externalInputs: AnalyzeTransactionVin[]; // unnecessary?
-    externalOutputs: AnalyzeTransactionVout[]; // value not needed?
+export interface AnalyzeTransactionParams {
+    internalInputs: AnalyzeInternalVinVout[];
+    internalOutputs: AnalyzeInternalVinVout[];
+    externalInputs: AnalyzeExternalVinVout[];
+    externalOutputs: AnalyzeExternalVinVout[];
 }
 
 export interface AnalyzeResult {
     results: {
-        pubKey: string;
+        address: string;
         anonymitySet: number;
     }[];
 }

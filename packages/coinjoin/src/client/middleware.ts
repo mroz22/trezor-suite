@@ -7,7 +7,12 @@ import {
     RealCredentials,
     CredentialsResponseValidation,
 } from '../types/coordinator';
-import { Credentials, SelectUtxo, AnalyzeTransaction, AnalyzeResult } from '../types/middleware';
+import {
+    Credentials,
+    SelectUtxo,
+    AnalyzeTransactionParams,
+    AnalyzeResult,
+} from '../types/middleware';
 
 export const getRealCredentials = async (
     amountsToRequest: number[],
@@ -109,7 +114,7 @@ export const selectUtxoForRound = async (
 };
 
 export const analyzeTransactions = async (
-    transactions: AnalyzeTransaction[],
+    transactions: AnalyzeTransactionParams[],
     options: RequestOptions,
 ) => {
     const data = await request<AnalyzeResult>('analyze-transaction', { transactions }, options);
