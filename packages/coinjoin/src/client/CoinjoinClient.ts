@@ -1,7 +1,13 @@
 import { EventEmitter } from 'events';
 
 import { Status } from './Status';
-import { selectRound, finishCurrentProcess, processRounds, resolveRequests } from './phase';
+import {
+    selectRound,
+    finishCurrentProcess,
+    processRounds,
+    resolveRequests,
+    analyzeTransactions,
+} from './phase';
 import { getNetwork } from '../utils/settingsUtils';
 import { registerAccount } from './account';
 import {
@@ -172,6 +178,18 @@ export class CoinjoinClient extends EventEmitter {
             roundsToUpdate.find(active => active.id === round.id),
         );
         this.onStatusUpdate({ rounds, changed });
+    }
+
+    /**
+     * Get transactions from CoinjoinBackend.getAccountInfo and calculate anonymity in middleware.
+     * Returns { key => value } where `key` is an address and `value` is an anonymity level of that address
+     */
+    analyzeTransactions(txs: any) {
+        return analyzeTransactions(txs, {
+            network: this.network,
+            middlewareUrl: this.settings.middlewareUrl,
+            signal: this.abortController.signal,
+        });
     }
 
     private log(...args: any[]) {
