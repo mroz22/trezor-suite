@@ -2,11 +2,15 @@ import { CoinjoinBackend } from '@trezor/coinjoin';
 import { createIpcProxy } from '@trezor/ipc-proxy';
 import TrezorConnect, { AccountInfo } from '@trezor/connect';
 import { isDesktop } from '@suite-utils/env';
+import { Account, CoinjoinServerEnvironment } from '@suite-common/wallet-types';
 import { COINJOIN_NETWORKS } from './config';
-import { Account } from '@suite-common/wallet-types';
 
-const loadInstance = (network: string) => {
-    const settings = COINJOIN_NETWORKS[network];
+const loadInstance = (network: string, environment?: CoinjoinServerEnvironment) => {
+    const settings =
+        environment === 'localhost'
+            ? COINJOIN_NETWORKS.regtestLocalhost
+            : COINJOIN_NETWORKS[network];
+
     if (isDesktop()) {
         return createIpcProxy<CoinjoinBackend>(
             'CoinjoinBackend',
@@ -145,9 +149,9 @@ const getCoinjoinAccountInfo = async (
 export class CoinjoinBackendService {
     private static instances: Record<string, CoinjoinBackend> = {};
 
-    static async createInstance(network: string) {
+    static async createInstance(network: string, environment?: CoinjoinServerEnvironment) {
         if (this.instances[network]) return this.instances[network];
-        const instance = await loadInstance(network);
+        const instance = await loadInstance(network, environment);
         // NOTE: temporary use blockbook implementation
         // @ts-expect-error
         instance.getAccountInfo = (params: GetAccountInfoParams) => {
