@@ -5,6 +5,7 @@ import { Network, networksCompatibility, NetworkSymbol } from '@suite-common/wal
 import { selectAccounts, selectCoins } from '@suite-common/wallet-core';
 import { toFiatCurrency } from '@suite-common/wallet-utils';
 import { selectFiatCurrency } from '@suite-native/module-settings';
+import { FiatCurrencyCode } from '@suite-common/suite-config';
 
 type Assets = Partial<Record<NetworkSymbol, string[]>>;
 
@@ -33,7 +34,13 @@ export const selectNetworksWithAssets = createSelector(
 );
 
 export const selectAssetsWithBalances = createSelector(
-    [selectNetworksWithAssets, selectBalancesPerNetwork, selectCoins, selectFiatCurrency],
+    [
+        selectNetworksWithAssets,
+        selectBalancesPerNetwork,
+        selectCoins,
+        selectFiatCurrency,
+        (_state, fiatCurrency: FiatCurrencyCode) => fiatCurrency,
+    ],
     (networks, assets, coins, fiatCurrency): AssetType[] =>
         networks
             .map((symbol: NetworkSymbol) => {

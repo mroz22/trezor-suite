@@ -16,9 +16,11 @@ import {
     AccountsStackRoutes,
 } from '@suite-native/navigation';
 import { NetworkSymbol } from '@suite-common/wallet-config';
+import { selectFiatCurrency } from '@suite-native/module-settings/libDev/src';
 
 import { AssetItem } from './AssetItem';
 import { selectAssetsWithBalances } from '../assetsSelectors';
+import { RootState } from '@suite-native/state';
 
 const importStyle = prepareNativeStyle(_ => ({
     marginTop: 12,
@@ -33,7 +35,10 @@ type HomeAssetsNavigationProp = TabToStackCompositeNavigationProp<
 export const Assets = () => {
     const navigation = useNavigation<HomeAssetsNavigationProp>();
     const { applyStyle } = useNativeStyles();
-    const assetsData = useSelector(selectAssetsWithBalances);
+    const fiatCurrency = useSelector(selectFiatCurrency);
+    const assetsData = useSelector((state: RootState) =>
+        selectAssetsWithBalances(state, fiatCurrency.label),
+    );
 
     const handleImportAssets = () => {
         navigation.navigate(RootStackRoutes.AccountsImport, {
