@@ -10,7 +10,7 @@ import {
 import {
     Credentials,
     SelectUtxo,
-    AnalyzeTransactionParams,
+    AnalyzeTransactionDetails,
     AnalyzeResult,
 } from '../types/middleware';
 
@@ -114,7 +114,7 @@ export const selectUtxoForRound = async (
 };
 
 export const analyzeTransactions = async (
-    transactions: AnalyzeTransactionParams[],
+    transactions: AnalyzeTransactionDetails[],
     options: RequestOptions,
 ) => {
     const data = await request<AnalyzeResult>('analyze-transaction', { transactions }, options);
