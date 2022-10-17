@@ -173,9 +173,7 @@ export const fetchAndUpdateAccount =
             if (isAccountOutdated(account, accountInfo) || isInitialUpdate) {
                 const cli = dispatch(getCoinjoinClient(account.symbol));
                 // console.warn('Ana', cli, Object.keys(cli), cli?.enable);
-                const anonymitySet = await cli?.analyzeTransactions(
-                    transactions.map(t => t.details),
-                );
+                const anonymitySet = await cli?.analyzeTransactions(transactions);
                 console.warn('Ana', anonymitySet);
                 const updatedAccount = dispatch(
                     accountsActions.updateAccount(
