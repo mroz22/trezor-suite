@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunk_trezor_suite_build=globalThis.webpackChunk_trezor_suite_build||[]).push([[22821],{22821:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var a={lastWeek:"eeee 'passat a' p",yesterday:"'ièr a' p",today:"'uèi a' p",tomorrow:"'deman a' p",nextWeek:"eeee 'a' p",other:"P"},r=function(e,t,r,u){return a[e]};t.default=r,e.exports=t.default}}]);
+//# sourceMappingURL=22821.7e030cb6.js.map

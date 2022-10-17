@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_trezor_suite_build=globalThis.webpackChunk_trezor_suite_build||[]).push([[3560],{3174:e=>{e.exports=JSON.parse('{"TR_EXCHANGE_FEES_INFO":"All fees included; the transaction fee is estimated at {feeAmount} ({feeAmountFiat})."}')}}]);

@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunk_trezor_suite_build=globalThis.webpackChunk_trezor_suite_build||[]).push([[44849],{44849:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var r={lastWeek:"'ថ្ងៃ'eeee'ស​ប្តា​ហ៍​មុនម៉ោង' p",yesterday:"'ម្សិលមិញនៅម៉ោង' p",today:"'ថ្ងៃនេះម៉ោង' p",tomorrow:"'ថ្ងៃស្អែកម៉ោង' p",nextWeek:"'ថ្ងៃ'eeee'ស​ប្តា​ហ៍​ក្រោយម៉ោង' p",other:"P"},u=function(e,t,u,o){return r[e]};t.default=u,e.exports=t.default}}]);
+//# sourceMappingURL=44849.a2b26d45.js.map

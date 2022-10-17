@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunk_trezor_suite_build=globalThis.webpackChunk_trezor_suite_build||[]).push([[20525],{20525:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var l={lastWeek:"'sidste' eeee 'kl.' p",yesterday:"'i går kl.' p",today:"'i dag kl.' p",tomorrow:"'i morgen kl.' p",nextWeek:"'på' eeee 'kl.' p",other:"P"},r=function(e,t,r,o){return l[e]};t.default=r,e.exports=t.default}}]);
+//# sourceMappingURL=20525.d0396657.js.map

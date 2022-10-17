@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_trezor_suite_build=globalThis.webpackChunk_trezor_suite_build||[]).push([[50368],{50368:(s,e,t)=>{s.exports=t.p+"assets/498a7d39de081707a145.png"}}]);

@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunk_trezor_suite_build=globalThis.webpackChunk_trezor_suite_build||[]).push([[56316],{56316:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var u={lastWeek:function(e){var t=e.getUTCDay(),u="'läschte";return 2!==t&&4!==t||(u+="n"),u+="' eeee 'um' p"},yesterday:"'gëschter um' p",today:"'haut um' p",tomorrow:"'moien um' p",nextWeek:"eeee 'um' p",other:"P"},r=function(e,t,r,o){var a=u[e];return"function"==typeof a?a(t):a};t.default=r,e.exports=t.default}}]);
+//# sourceMappingURL=56316.e7bd36cb.js.map
